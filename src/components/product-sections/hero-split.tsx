@@ -1,4 +1,4 @@
-import { ArrowRight, Star, Shield, Globe, Check } from 'lucide-react'
+import { Star, Shield, Globe, Check } from 'lucide-react'
 import { StoreButton } from '@/components/store-button'
 import { PhoneFrame } from '@/components/phone-frame'
 import { VirtualCard } from '@/components/virtual-card'

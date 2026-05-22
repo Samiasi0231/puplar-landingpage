@@ -1,5 +1,5 @@
 import { ArrowRight } from 'lucide-react'
-import logo from "@/assets/logo.svg";
+
 
 const navItems = [
   { id: 'product', label: 'Product',      href: '#product' },
