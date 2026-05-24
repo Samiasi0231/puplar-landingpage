@@ -1,16 +1,16 @@
-import { ArrowRight } from 'lucide-react'
-
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const navItems = [
-  { id: 'product', label: 'Product',      href: '#product' },
-  { id: 'card',    label: 'Virtual card', href: '#card'    },
-  { id: 'tickets', label: 'Tickets',      href: '#tickets' },
-  { id: 'about',   label: 'About',        href: '#'        },
-  { id: 'help',    label: 'Help',         href: '#'        },
-]
+  { id: "product", label: "Product", href: "/" },
+  { id: "card", label: "Virtual card", href: "#card" },
+  { id: "tickets", label: "Tickets", href: "#tickets" },
+  { id: "about", label: "About", href: "/about" },
+  { id: "help", label: "Help", href: "#" },
+];
 
 interface LandingHeaderProps {
-  active?: string | null
+  active?: string | null;
 }
 
 export function LandingHeader({ active = null }: LandingHeaderProps) {
@@ -23,19 +23,29 @@ export function LandingHeader({ active = null }: LandingHeaderProps) {
             alt="Logo"
             className="w-18 h-10 object-contain"
           />
+
           <nav className="hidden md:flex gap-8">
             {navItems.map((item) => {
               const isActive = item.id === active;
+
+              const className = `text-[14px] font-medium tracking-[-0.005em] border-b-2 pb-0.5 transition-colors ${
+                isActive
+                  ? "text-puplar-900 border-puplar-700"
+                  : "text-puplar-900/75 hover:text-puplar-900 border-transparent"
+              }`;
+
+              // Route navigation
+              if (item.href.startsWith("/")) {
+                return (
+                  <Link key={item.id} to={item.href} className={className}>
+                    {item.label}
+                  </Link>
+                );
+              }
+
+              // Section navigation
               return (
-                <a
-                  key={item.id}
-                  href={item.href}
-                  className={`text-[14px] font-medium tracking-[-0.005em] border-b-2 pb-0.5 transition-colors ${
-                    isActive
-                      ? "text-puplar-900 border-puplar-700"
-                      : "text-puplar-900/75 hover:text-puplar-900 border-transparent"
-                  }`}
-                >
+                <a key={item.id} href={item.href} className={className}>
                   {item.label}
                 </a>
               );
@@ -50,6 +60,7 @@ export function LandingHeader({ active = null }: LandingHeaderProps) {
           >
             Sign in
           </a>
+
           <a
             href="#download"
             className="inline-flex items-center gap-1.5 bg-puplar-700 hover:bg-puplar-900 text-white text-[14px] font-semibold px-3.5 py-2 rounded-md tracking-[-0.005em] transition-colors"

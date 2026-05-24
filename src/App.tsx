@@ -1,31 +1,30 @@
-import { useState } from 'react'
-import { LandingHeader } from '@/components/landing-header'
-import { LandingFooter } from '@/components/landing-footer'
-import { HeroSplit } from '@/components/product-sections/hero-split'
-import { HeroCentered } from '@/components/product-sections/hero-centered'
-import { StatsStrip } from '@/components/product-sections/stats-strip'
-import { HowItWorks } from '@/components/product-sections/howIt-works'
-import { FundSection } from '@/components/product-sections/fund-section'
-import { CardShowcase } from '@/components/product-sections/card-showcase'
-import { TicketsBanner } from '@/components/product-sections/tickets-banner'
-import { Testimonials } from '@/components/product-sections/testimonials' 
-import { DownloadCta } from '@/components/product-sections/download-cta'
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import About from "./pages/about";
+import Product from "./pages/product";
+import { LandingHeader } from "@/layout/landing-header";
+import { LandingFooter } from "@/layout/landing-footer";
 
-export default function App() {
-  const [heroVariant] = useState<'split' | 'centered'>('split')
+function AppContent() {
+  const location = useLocation();
+
+  const active = location.pathname === "/about" ? "about" : "product";
 
   return (
-    <div>
-      <LandingHeader active="product" />
-      {heroVariant === 'split' ? <HeroSplit /> : <HeroCentered />}
-      <StatsStrip />
-      <HowItWorks />
-      <FundSection />
-      <CardShowcase />
-      <TicketsBanner />
-      <Testimonials />
-      <DownloadCta />
+    <>
+      <LandingHeader active={active} />
+      <Routes>
+        <Route path="/" element={<Product/>} />
+        <Route path="/about" element={<About/>} />
+      </Routes>
       <LandingFooter />
-    </div>
-  )
+    </>
+  );
+}
+
+export default function AppRouter() {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
+  );
 }

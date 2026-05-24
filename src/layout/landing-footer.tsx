@@ -1,5 +1,5 @@
 
-import { StoreButton } from './store-button'
+import { StoreButton } from "../components/store-button"
 
 const footerCols = [
   {
